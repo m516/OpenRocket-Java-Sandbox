@@ -1,7 +1,7 @@
 # OpenRocket-Java-Sandbox
 This is a simple Eclipse project that uses the exposed classes in the OpenRocket executable JAR file to run and change simulations. 
 
-## Installation
+## Setup
 These instructions assume you have Java 1.8 installed on your computer and is the default JRE and JDK. If that's not the case, please do so before continuing. Otherwise Eclipse won't start properly (without Java) or OpenRocket will likely throw errors (with Java 9+: [See ](https://github.com/openrocket/openrocket/issues/542)[these ](https://github.com/openrocket/openrocket/issues/433)[issues](https://github.com/openrocket/openrocket/issues/347) from the [OpenRocket repository](https://github.com/openrocket/openrocket/))
 
 Download the latest version of [Eclipse](https://www.eclipse.org/downloads/). You will need a Java JVM
