@@ -64,10 +64,8 @@ public class HelloOpenRocket {
 		
 		//Run the simulation
 		PrintingListener pl = new PrintingListener();
-		ord.getSimulation(0).simulate(pl);
+		for(int i = 0; i < 25; i ++) {
+			ord.getSimulation(0).simulate(pl);
+		}
 	}
-	
-	
-	
-	Rocket robert;
 }
