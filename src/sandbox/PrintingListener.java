@@ -3,6 +3,9 @@
  */
 package sandbox;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.openrocket.simulation.SimulationStatus;
 import net.sf.openrocket.simulation.exception.SimulationCancelledException;
 import net.sf.openrocket.simulation.exception.SimulationException;
@@ -13,8 +16,12 @@ import net.sf.openrocket.simulation.listeners.SimulationListener;
  *
  */
 public class PrintingListener implements SimulationListener {
+	//Data to retrieve from simulations
 	static double totalApogee = 0.0;
 	static int numSimulations = 0;
+	
+	//Logger instance
+	private static final Logger logger = LoggerFactory.getLogger(PrintingListener.class);
 	
 	/**
 	 * 
@@ -32,7 +39,7 @@ public class PrintingListener implements SimulationListener {
 	@Override
 	public void endSimulation(SimulationStatus arg0, SimulationException arg1) {
 		if(arg1 != null) {
-			System.out.println(arg1.getMessage());
+			logger.info(arg1.getMessage());
 		}
 	}
 
@@ -59,7 +66,7 @@ public class PrintingListener implements SimulationListener {
 			sb.append(": ");
 			sb.append("average apogee altitude is ");
 			sb.append(averageApogee);
-			System.out.println(sb.toString());
+			logger.info(sb.toString());
 			
 			//Halt the simulation
 			throw new SimulationCancelledException();
@@ -75,7 +82,7 @@ public class PrintingListener implements SimulationListener {
 
 	@Override
 	public void startSimulation(SimulationStatus arg0) throws SimulationException {
-		System.out.println("Starting simulation");
+		logger.info("Starting simulation");
 	}
 
 }
