@@ -32,7 +32,7 @@ public class HelloOpenRocket {
 		LoggingSystemSetup.addConsoleAppender();
 		
 		//Get the Open Rocket file
-		File f = new File("p.ork");
+		File f = new File("data/rockets/Invictus.ork");
 		
 		//Check if it exists
 		if(f.exists()) {
