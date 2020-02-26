@@ -15,7 +15,11 @@ import java.util.logging.Logger;
  * A class that manages all the properties of this project in a cute little package
  */
 public class PropertyManager {
-	private static final Logger LOGGER = Logger.getLogger( PropertyManager.class.getName() );
+	private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
+
+	private static PropertyManager thisInstance;
+	private boolean initialized = false;
 
 	/** 
 	 * 
@@ -27,34 +31,44 @@ public class PropertyManager {
 		readProperties();
 	}
 	
+	private void singletonInitialize() {
+		if(initialized) return;
+		readProperties();
+		initialized = true;
+	}
+	
+	public static void initialize() {
+		if(thisInstance==null) thisInstance = new PropertyManager();
+		thisInstance.singletonInitialize();
+	}
+	
 	/**
 	 * Reads user-configured properties
 	 */
 	private void readProperties() {
-		LOGGER.log(Level.INFO, "Reading properties");
+		LOGGER.log(Level.FINE, "Reading properties");
 		propertiesFile = new File("data/properties.txt");
 		properties = new Properties();
 		try {
 			InputStream propertiesInputStream = new FileInputStream(propertiesFile);
 			properties.load(propertiesInputStream);
 		} catch (FileNotFoundException e) {
-			System.err.println("Cannot find properties file. Creating a new one");
+			LOGGER.log(Level.WARNING,"Cannot find properties file. Creating a new one");
 			try {
 				PrintWriter pw = new PrintWriter(new FileWriter(propertiesFile.getCanonicalPath()));
 				properties.put("airbrakes_exe","data/airbrakes_code/airbrakes_sim.exe");
 				properties.store(pw, "Generated properties file for sandbox ");
 			} catch (IOException e1) {
-				System.err.println("Couldn't write the properties file! Aborting.\n\nStack trace:");
+				LOGGER.log(Level.SEVERE,"Couldn't write the properties file! Aborting.\n\nStack trace:");
 				e1.printStackTrace();
 				return;
 			}
 		} catch (IOException e) {
-			System.err.println("Couldn't write the properties file! Aborting.\n\nStack trace:");
+			LOGGER.log(Level.SEVERE,"Couldn't write the properties file! Aborting.\n\nStack trace:");
 			e.printStackTrace();
 			return;
 		}
-		System.out.print("Airbrakes executable: ");
-		System.out.println(properties.getProperty("airbrakes_exe"));
+		LOGGER.log(Level.CONFIG,"Airbrakes executable: " + properties.getProperty("airbrakes_exe"));
 	}
 	
 	
