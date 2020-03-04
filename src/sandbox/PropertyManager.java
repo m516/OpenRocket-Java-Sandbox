@@ -71,6 +71,7 @@ public class PropertyManager {
 		LOGGER.log(Level.CONFIG,"Airbrakes executable: " + properties.getProperty("airbrakes_exe"));
 	}
 	
-	
-
+	public static String GetProperty(String key) {
+		return thisInstance.properties.getProperty(key);
+	}
 }
