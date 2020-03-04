@@ -21,6 +21,8 @@ public class HelloAirbrakes {
 		System.out.println("Hello there!");
 		LOGGER.log(Level.INFO, "Log away!");
 		PropertyManager.initialize();
+		AirbrakesSocketConnection as = new AirbrakesSocketConnection();
+		as.initialize();
 	}
 
 	/**
@@ -29,6 +31,7 @@ public class HelloAirbrakes {
 	public static void main(String[] args) {
 		HelloAirbrakes helloAirbrakes = new HelloAirbrakes();
 	}
+	
 	
 
 }
