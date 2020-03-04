@@ -72,6 +72,10 @@ public class PropertyManager {
 	}
 	
 	public static String GetProperty(String key) {
-		return thisInstance.properties.getProperty(key);
+		String property = thisInstance.properties.getProperty(key);
+		if(property == null) {
+			LOGGER.log(Level.WARNING, "couldn't find any value for the key: "+key);
+		}
+		return property;
 	}
 }
