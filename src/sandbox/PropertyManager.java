@@ -28,7 +28,7 @@ public class PropertyManager {
 	private Properties properties;
 
 	private PropertyManager() {
-		readProperties();
+		singletonInitialize();
 	}
 	
 	private void singletonInitialize() {
@@ -72,6 +72,7 @@ public class PropertyManager {
 	}
 	
 	public static String GetProperty(String key) {
+		if(thisInstance==null) thisInstance = new PropertyManager();
 		String property = thisInstance.properties.getProperty(key);
 		if(property == null) {
 			LOGGER.log(Level.WARNING, "couldn't find any value for the key: "+key);
