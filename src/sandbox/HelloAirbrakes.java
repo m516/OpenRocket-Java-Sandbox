@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @author Micah Mundy
  *
  */
-public class HelloAirbrakes {
+public class HelloAirbrakes implements AirbrakesSocketConnection.OutputListener {
 	private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
 	/**
@@ -22,16 +22,27 @@ public class HelloAirbrakes {
 		LOGGER.log(Level.INFO, "Log away!");
 		PropertyManager.initialize();
 		AirbrakesSocketConnection as = new AirbrakesSocketConnection();
-		as.initialize();
+		as.addOutputListener(this);
+		as.start();
 	}
 
 	/**
+	 * Main method for testing airbrakes
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		HelloAirbrakes helloAirbrakes = new HelloAirbrakes();
 	}
-	
-	
 
+	@Override
+	public void outputReceived(byte[] bytes) {
+		for (int i = 0; i < bytes.length; i++) {
+			System.out.print(bytes[i]);
+			System.out.print(" ");
+		}
+		System.out.println();
+
+		AirbrakesParser.parseCommand(bytes);
+	}
 }
