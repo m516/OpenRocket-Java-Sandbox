@@ -20,7 +20,6 @@ public class HelloAirbrakes implements AirbrakesSocketConnection.OutputListener 
 	public HelloAirbrakes() {
 		System.out.println("Hello there!");
 		LOGGER.log(Level.INFO, "Log away!");
-		PropertyManager.initialize();
 		AirbrakesSocketConnection as = new AirbrakesSocketConnection();
 		as.addOutputListener(this);
 		as.start();
