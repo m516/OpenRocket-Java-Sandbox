@@ -2,6 +2,7 @@ package sandbox;
 
 public class AirbrakesParser {
 	
+	@SuppressWarnings("unused")
 	private static AirbrakesParser thisInstance = new AirbrakesParser();
 	
 	private static byte code_request_data_MPL115A2,
