@@ -15,14 +15,14 @@ public class AirbrakesParser {
 			code_command_finished;
 
 	private AirbrakesParser() {
-		code_request_data_MPL115A2      = Byte.parseByte(PropertyManager.GetProperty("airbrakes_request_data_MPL115A2"));
-		code_request_data_BNO055_addr_A = Byte.parseByte(PropertyManager.GetProperty("airbrakes_request_data_BNO055_addr_A"));
-		code_request_data_BNO055_addr_B = Byte.parseByte(PropertyManager.GetProperty("airbrakes_request_data_BNO055_addr_B"));
-		code_request_data_time          = Byte.parseByte(PropertyManager.GetProperty("airbrakes_request_data_time"));
-		code_command_actuate            = Byte.parseByte(PropertyManager.GetProperty("airbrakes_command_actuate"));
-		code_command_deactuate          = Byte.parseByte(PropertyManager.GetProperty("airbrakes_command_deactuate"));
-		code_command_done               = Byte.parseByte(PropertyManager.GetProperty("airbrakes_command_done"));
-		code_command_finished           = Byte.parseByte(PropertyManager.GetProperty("airbrakes_command_finished"));
+		code_request_data_MPL115A2      = Byte.parseByte(PropertyManager.getProperty("airbrakes_request_data_MPL115A2"));
+		code_request_data_BNO055_addr_A = Byte.parseByte(PropertyManager.getProperty("airbrakes_request_data_BNO055_addr_A"));
+		code_request_data_BNO055_addr_B = Byte.parseByte(PropertyManager.getProperty("airbrakes_request_data_BNO055_addr_B"));
+		code_request_data_time          = Byte.parseByte(PropertyManager.getProperty("airbrakes_request_data_time"));
+		code_command_actuate            = Byte.parseByte(PropertyManager.getProperty("airbrakes_command_actuate"));
+		code_command_deactuate          = Byte.parseByte(PropertyManager.getProperty("airbrakes_command_deactuate"));
+		code_command_done               = Byte.parseByte(PropertyManager.getProperty("airbrakes_command_done"));
+		code_command_finished           = Byte.parseByte(PropertyManager.getProperty("airbrakes_command_finished"));
 	}
 
 	

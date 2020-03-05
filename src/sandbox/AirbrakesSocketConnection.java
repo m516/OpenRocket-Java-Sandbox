@@ -263,7 +263,7 @@ public class AirbrakesSocketConnection {
 	public void runExecutable() {
 		LOGGER.log(Level.FINER, "Beginning execution procedures");
 		ExecutionThread et = new ExecutionThread();
-		String command = PropertyManager.GetProperty("airbrakes_exe");
+		String command = PropertyManager.getProperty("airbrakes_exe");
 		LOGGER.log(Level.FINEST, "Running the following command: "+command);
 		et.setExecutableFilename(command);
 		LOGGER.log(Level.FINEST, "Beginning execution thread");
@@ -282,7 +282,7 @@ public class AirbrakesSocketConnection {
 		AirbrakesServerThread ast = new AirbrakesServerThread();
 		
 		//Set its port to airbrakes_server_port
-		String port = PropertyManager.GetProperty("airbrakes_server_port");
+		String port = PropertyManager.getProperty("airbrakes_server_port");
 		LOGGER.log(Level.FINEST, "Running server on the following port: "+port);
 		ast.setPort(Integer.parseUnsignedInt(port));
 		

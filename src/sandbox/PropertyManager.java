@@ -70,7 +70,7 @@ public class PropertyManager {
 	 * @param key the key to search for
 	 * @return the value associated with that key
 	 */
-	public static String GetProperty(String key) {
+	public static String getProperty(String key) {
 		checkInitialization();
 		
 		String property = thisInstance.properties.getProperty(key);
