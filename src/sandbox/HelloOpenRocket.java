@@ -78,9 +78,7 @@ public class HelloOpenRocket {
 		//Initialize the SimulationListener
 		PrintingListener pl = new PrintingListener();
 		//Simulate 25 times
-		for(int i = 0; i < 25; i ++) {
-			sim.simulate(pl);
-		}
+		sim.simulate(pl);
 		
 		
 	}

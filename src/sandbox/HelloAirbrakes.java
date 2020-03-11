@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @author Micah Mundy
  *
  */
-public class HelloAirbrakes implements AirbrakesSocketConnection.OutputListener {
+public class HelloAirbrakes implements AirbrakesSocketConnection.MessageListener {
 	private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
 	/**
@@ -21,7 +21,7 @@ public class HelloAirbrakes implements AirbrakesSocketConnection.OutputListener 
 		System.out.println("Hello there!");
 		LOGGER.log(Level.INFO, "Log away!");
 		AirbrakesSocketConnection as = new AirbrakesSocketConnection();
-		as.addOutputListener(this);
+		as.addMessageListener(this);
 		as.start();
 	}
 
@@ -33,9 +33,13 @@ public class HelloAirbrakes implements AirbrakesSocketConnection.OutputListener 
 		@SuppressWarnings("unused")
 		HelloAirbrakes helloAirbrakes = new HelloAirbrakes();
 	}
-
+	
+	/**
+	 * What happens when the airbrakes code sends a message
+	 * to this program
+	 */
 	@Override
-	public void outputReceived(byte[] bytes) {
+	public void messageReceived(byte[] bytes) {
 		for (int i = 0; i < bytes.length; i++) {
 			System.out.print(bytes[i]);
 			System.out.print(" ");

@@ -70,6 +70,10 @@ public class PrintingListener implements SimulationListener {
 			
 			//Halt the simulation
 			throw new SimulationCancelledException();
+			
+			//Look for
+			// Coefficient of drag/drag #
+			// Increase drag by 50% when airbrakes deploy
 		}
 	}
 
