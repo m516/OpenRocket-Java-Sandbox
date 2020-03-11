@@ -200,6 +200,9 @@ public class AirbrakesSocketConnection {
 				//Create a buffer for bytes
 				ArrayList<Byte> bytes = new ArrayList<Byte>();
 				InputStream dis = s.getInputStream();
+				
+				//Create the output stream
+				os = new BufferedOutputStream(s.getOutputStream());
 
 
 				//While the socket is connected
@@ -331,10 +334,12 @@ public class AirbrakesSocketConnection {
 		if(!currentAirbrakesServerThread.isRunning) 
 			throw new IllegalStateException("AirbrakesServerThread exists, but is not running");
 		
-		LOGGER.log(Level.FINEST, "Sending a message: " + String.valueOf(bytes));		
+		LOGGER.log(Level.INFO, "Sending a message: " + String.valueOf(bytes));		
 		
 		try {
 			currentAirbrakesServerThread.os.write(bytes);
+
+			LOGGER.log(Level.INFO, "Message sent successfully: " + String.valueOf(bytes));	
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, "Error writing a message: "+String.valueOf(bytes));
 			e.printStackTrace();

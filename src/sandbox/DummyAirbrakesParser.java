@@ -54,6 +54,8 @@ public class DummyAirbrakesParser extends AirbrakesParser {
 	@Override
 	protected void sendBNO055ResponseA() {
 		System.out.println("code_request_data_BNO055_addr_A");
+		byte[] response = {71,37,65,25,74,25};
+		currentAirbrakesSocketConnection.sendMessage(response);
 	}
 
 	@Override
