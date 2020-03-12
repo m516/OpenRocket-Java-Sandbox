@@ -1,8 +1,10 @@
 package sandbox;
 
 import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.ProcessBuilder.Redirect;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -168,7 +170,7 @@ public class AirbrakesSocketConnection {
 		volatile boolean isRunning = false;
 
 		//Output stream for writing bytes to the airbrakes code
-		private BufferedOutputStream os;
+		private OutputStream os;
 
 		/**
 		 * The main body of the thread
@@ -202,7 +204,7 @@ public class AirbrakesSocketConnection {
 				InputStream dis = s.getInputStream();
 				
 				//Create the output stream
-				os = new BufferedOutputStream(s.getOutputStream());
+				os = s.getOutputStream();
 
 
 				//While the socket is connected
@@ -338,6 +340,7 @@ public class AirbrakesSocketConnection {
 		
 		try {
 			currentAirbrakesServerThread.os.write(bytes);
+			currentAirbrakesServerThread.os.flush();
 
 			LOGGER.log(Level.INFO, "Message sent successfully: " + String.valueOf(bytes));	
 		} catch (IOException e) {
