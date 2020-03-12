@@ -14,7 +14,6 @@ public class DummyAirbrakesParser extends AirbrakesParser {
 	 */
 	public DummyAirbrakesParser(AirbrakesSocketConnection asc) {
 		super(asc);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -44,17 +43,21 @@ public class DummyAirbrakesParser extends AirbrakesParser {
 	@Override
 	protected void sendTimeResponse() {
 		System.out.println("code_request_data_time");
+		byte[] response = {66,-13,2,84};
+		currentAirbrakesSocketConnection.sendMessage(response);
 	}
 
 	@Override
 	protected void sendMPL115A2Response() {
 		System.out.println("code_request_data_MPL115A2");
+		byte[] response = {0,0,0,-57,3};
+		currentAirbrakesSocketConnection.sendMessage(response);
 	}
 
 	@Override
 	protected void sendBNO055ResponseA() {
 		System.out.println("code_request_data_BNO055_addr_A");
-		byte[] response = {71,37,65,25,74,25};
+		byte[] response = {-96,99,0,0,0};
 		currentAirbrakesSocketConnection.sendMessage(response);
 	}
 
