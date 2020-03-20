@@ -1,7 +1,5 @@
 package sandbox;
 
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -101,7 +99,7 @@ public class AirbrakesSocketConnection {
 
 			//Check for a filename
 			if(executableFilename == null) {
-				throw new IllegalStateException("Airbrakes execution thread is not properly configured. It looks like you missed to give it a reference to an executable file.");
+				throw new IllegalStateException("Airbrakes execution thread is not properly configured. It looks like you forgot to give it a reference to an executable file.");
 			}
 
 
@@ -247,6 +245,7 @@ public class AirbrakesSocketConnection {
 
 			} catch (IOException e) {
 				LOGGER.log(Level.SEVERE, "Connection experienced an IOException");
+				System.out.println("Perhaps you are running two instances of the Airbrakes code?");
 				e.printStackTrace();
 			}
 
