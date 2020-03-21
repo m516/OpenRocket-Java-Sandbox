@@ -9,6 +9,8 @@ package util;
  */
 public class Force extends Vector3f {
 	
+	//Units must be numbered from 0 to 8 so that the conversion table works as expected
+	
 	/** A flag that indicates that a certain Force instance is in Newtons **/
 	public static final int UNIT_NEWTON = 0;
 	/** A flag that indicates that a certain Force instance is in kilograms 
@@ -33,7 +35,7 @@ public class Force extends Vector3f {
 	/**
 	 * A conversion table of all units relative to Newtons
 	 */
-	private static final float[] CONVERSION_TABLE = 
+	private static final float[] FORCE_CONVERSION_TABLE = 
 		{
 				1.f,
 				0.1019716f,
@@ -258,7 +260,7 @@ public class Force extends Vector3f {
 	 * accordingly so that minimal data is lost.
 	 */
 	public void setUnit(int newUnit) {
-		mult(CONVERSION_TABLE[newUnit]/CONVERSION_TABLE[unit]);
+		mult(FORCE_CONVERSION_TABLE[newUnit]/FORCE_CONVERSION_TABLE[unit]);
 		unit = newUnit;
 	}
 	
