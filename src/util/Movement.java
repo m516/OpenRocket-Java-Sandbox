@@ -1,4 +1,3 @@
-//TODO implement movement methods. Conversions done. Nothing else done.
 
 /**
  * 
