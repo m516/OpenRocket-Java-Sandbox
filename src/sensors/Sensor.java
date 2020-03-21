@@ -1,7 +1,7 @@
 /**
  * 
  */
-package sandbox.sensors;
+package sensors;
 
 /**
  * @author Micah

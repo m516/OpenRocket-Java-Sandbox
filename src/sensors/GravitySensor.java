@@ -1,4 +1,4 @@
-package sandbox.sensors;
+package sensors;
 
 import util.Force;
 
