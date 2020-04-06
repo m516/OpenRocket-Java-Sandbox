@@ -1,6 +1,6 @@
 package sensors;
 
-import util.Force;
+import util.Movement;
 
 /**
  * 
@@ -11,8 +11,8 @@ import util.Force;
 public interface GravitySensor extends Sensor {
 	
 	/**
-	 * @return the Cartesian acceleration force of 
+	 * @return the Cartesian acceleration value of
 	 * gravity acting on this sensor
 	 */
-	public Force getGravity();
+	public Movement getGravity();
 }

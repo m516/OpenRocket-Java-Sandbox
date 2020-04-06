@@ -1,6 +1,6 @@
 package sensors;
 
-import util.Force;
+import util.Movement;
 
 /**
  * 
@@ -13,5 +13,5 @@ public interface AccelerationSensor extends Sensor {
 	/**
 	 * @return the Cartesian acceleration force of this sensor
 	 */
-	public Force getAcceleration();
+	public Movement getAcceleration();
 }
