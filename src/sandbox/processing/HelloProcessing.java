@@ -1,7 +1,7 @@
 /**
  * 
  */
-package sandbox;
+package sandbox.processing;
 
 import processing.core.PApplet;
 

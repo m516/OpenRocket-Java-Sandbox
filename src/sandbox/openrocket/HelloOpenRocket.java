@@ -1,7 +1,7 @@
 /**
  * Opens up a new OpenRocket simulation window
  */
-package sandbox;
+package sandbox.openrocket;
 import java.io.File;
 
 import org.slf4j.Logger;

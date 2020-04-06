@@ -5,7 +5,6 @@ package sandbox.sensors;
 
 import sensors.AccelerationSensor;
 import sensors.GravitySensor;
-import util.Force;
 import util.Movement;
 
 /**
@@ -17,7 +16,7 @@ public class DummyIMU implements GravitySensor, AccelerationSensor {
 	
 	public DummyIMU() {
 		acceleration = new Movement(0, 0, 1, Movement.UNIT_DISTANCE_METER, Movement.UNIT_TIME_SECOND, Movement.UNIT_TIME_SECOND);
-		gravity = new Movement(0, 0, 1, Movement.UNIT_DISTANCE_METER, Movement.UNIT_TIME_SECOND, Movement.UNIT_TIME_SECOND);
+		gravity = new Movement(0, 0, -9.81, Movement.UNIT_DISTANCE_METER, Movement.UNIT_TIME_SECOND, Movement.UNIT_TIME_SECOND);
 	}
 	
 	@Override

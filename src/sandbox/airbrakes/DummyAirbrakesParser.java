@@ -1,7 +1,7 @@
 /**
  * 
  */
-package sandbox;
+package sandbox.airbrakes;
 
 /**
  * @author Beta

@@ -1,7 +1,9 @@
-package sandbox;
+package sandbox.airbrakes;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import sandbox.PropertyManager;
 
 public abstract class AirbrakesParser implements AirbrakesSocketConnection.MessageListener{
 	

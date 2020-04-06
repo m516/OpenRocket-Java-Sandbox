@@ -283,6 +283,26 @@ public class Movement extends Vector3f {
 		this.unitDistance = unitDistance;
 		this.unitTime = unitTime;
 	}
+	
+	/**
+	 * 
+	 * Creates a new movement with a given distance unit and time unit (if given)
+	 * @param x the x-component of this Movement
+	 * @param y the y-component of this Movement
+	 * @param z the z-component of this Movement
+	 * @param unitDistance the distance unit of this Movement
+	 * @param unitTime the time units of this Movement
+	 * 
+	 * @see UNIT_DISTANCE_METER
+	 * @see UNIT_TIME_SECOND
+	 */
+	public Movement(double x, double y, double z, int unitDistance, int... unitTime) {
+		this.x = (float)x;
+		this.y = (float)y;
+		this.z = (float)z;
+		this.unitDistance = unitDistance;
+		this.unitTime = unitTime;
+	}
 
 	/**
 	 * 
@@ -326,6 +346,23 @@ public class Movement extends Vector3f {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		this.unitDistance = unitDistance;
+	}
+	
+	/**
+	 * 
+	 * Creates a new distance with a given distance unit
+	 * @param x the x-component of this Movement
+	 * @param y the y-component of this Movement
+	 * @param z the z-component of this Movement
+	 * @param unitDistance the distance unit of this Movement
+	 * 
+	 * @see UNIT_DISTANCE_METER
+	 */
+	public Movement(double x, double y, double z, int unitDistance) {
+		this.x = (float)x;
+		this.y = (float)y;
+		this.z = (float)z;
 		this.unitDistance = unitDistance;
 	}
 

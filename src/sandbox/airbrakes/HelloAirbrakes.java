@@ -1,7 +1,7 @@
 /**
  * 
  */
-package sandbox;
+package sandbox.airbrakes;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
