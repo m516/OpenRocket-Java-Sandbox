@@ -566,6 +566,50 @@ public class Movement extends Vector3f {
 		y+=other.y;
 		z+=other.z;
 	}
+	
+	/**
+	 * Gets the average change of two Movements. <p>
+	 * For example, the average change of two velocity vectors is an acceleration. <br>
+	 * And the average change of two position vectors is a velocity. <br>
+	 * @param m1 the first Movement
+	 * @param m2 the second Movement. Must be the same degree as the first Movement.
+	 * @return the change between the Movements. The degree of this new Movement is one
+	 * higher than the degree of the other movement.
+	 * 
+	 */
+	public static Movement averageChangeOf(Movement m1, Movement m2, double time, int timeUnits) {
+		if(timeUnits<0 || timeUnits>5) 
+			throw new IllegalArgumentException("Illegal time unit: "+timeUnits);
+		if(m1.unitTime.length != m2.unitTime.length) {
+			System.err.println("Time units mismatch!");
+
+			System.err.print("You are trying to update a Movement of degree ");
+			System.err.print(m1.unitTime.length);
+			System.err.print(" with a Movement of degree ");
+			System.err.print(m2.unitTime.length);
+			System.err.println(".");
+
+			System.err.print("This is similar to updating a ");
+			System.err.print(m1.getType());
+			System.err.print(" to a ");
+			System.err.print(getType(m2.unitTime.length));
+			System.err.println(".");
+
+			throw new IllegalArgumentException("Time units are invalid");
+		}
+		
+		Movement m2c = m2.copy();
+		m2c.convertTo(m1.unitDistance, m1.unitTime);
+		
+		int[] retTimeUnits = new int[m1.unitTime.length+1];
+		for (int i = 0; i < m1.unitTime.length; i++) {
+			retTimeUnits[i] = m1.unitTime[i];
+		}
+		
+		retTimeUnits[retTimeUnits.length-1] = timeUnits;
+		Movement ret = new Movement((m1.x-m2c.x)/time, (m1.y-m2c.y)/time, (m1.z-m2c.z)/time, m1.unitDistance, retTimeUnits);
+		return ret;
+	}
 
 
 
