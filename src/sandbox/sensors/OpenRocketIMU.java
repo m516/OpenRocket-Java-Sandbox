@@ -15,6 +15,9 @@ import util.Movement;
  *
  */
 public class OpenRocketIMU implements SimulationListener, GravitySensor, AccelerationSensor {
+	
+	Movement acceleration, gravity;
+	Movement velocity;
 
 	/**
 	 * 
@@ -55,8 +58,15 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 
 	@Override
 	public void postStep(SimulationStatus arg0) throws SimulationException {
-		// TODO Auto-generated method stub
-
+		Movement newVelocity = new Movement(arg0.getRocketVelocity().x, 
+				arg0.getRocketVelocity().y, 
+				arg0.getRocketVelocity().z, 
+				Movement.UNIT_DISTANCE_METER, 
+				Movement.UNIT_TIME_SECOND);
+		if(velocity!=null) {
+			acceleration = Movement.averageChangeOf(newVelocity, velocity, 1.0, Movement.UNIT_TIME_SECOND); //TODO get delta time between two simulation steps
+		}
+		
 	}
 
 	@Override
