@@ -247,6 +247,35 @@ public class Movement extends Vector3f {
 				"jerk",
 				"jounce"
 		};
+	
+	/**
+	 * Names of the actual distance units, all lowercase and singular
+	 */
+	private static final String[] DISTANCE_UNIT_NAMES_PLURAL = 
+		{
+				 "meters",
+				 "kilometers",
+				 "centimeters",
+				 "millimeters",
+				 "feet",
+				 "inches",
+				 "miles",
+				 "yards",
+				 "nautical miles"
+		};
+	
+	/**
+	 * Names of the actual time units, all lowercase and singular
+	 */
+	private static final String[] TIME_UNIT_NAMES_SINGULAR = 
+		{
+				 "second",
+				 "millisecond",
+				 "minute",
+				 "hour",
+				 "day",
+				 "microsecond"
+		};
 
 	private int unitDistance;
 	private int[] unitTime;
@@ -303,6 +332,32 @@ public class Movement extends Vector3f {
 		this.unitDistance = unitDistance;
 		this.unitTime = unitTime;
 	}
+	
+	/**
+	 * 
+	 * Creates a new movement with a given distance unit and time unit (if given)
+	 * @param x the x-component of this Movement
+	 * @param y the y-component of this Movement
+	 * @param z the z-component of this Movement
+	 * @param unitDistance the distance unit of this Movement
+	 * @param unitTime the time units of this Movement
+	 * @param degree the degree of this Movement. For example, a Movement of
+	 * degree 0 is a distance, degree 1 is a velocity, degree 2 is an 
+	 * acceleration, etc.
+	 * 
+	 * @see UNIT_DISTANCE_METER
+	 * @see UNIT_TIME_SECOND
+	 */
+	public Movement(double x, double y, double z, int unitDistance, int unitTime, int degree) {
+		this.x = (float)x;
+		this.y = (float)y;
+		this.z = (float)z;
+		this.unitDistance = unitDistance;
+		this.unitTime = new int[degree];
+		for (int i = 0; i < degree; i++) {
+			this.unitTime[i]=unitTime;
+		}
+	}
 
 	/**
 	 * 
@@ -320,6 +375,31 @@ public class Movement extends Vector3f {
 		this.z = value.z;
 		this.unitDistance = unitDistance;
 		this.unitTime = unitTime;
+	}
+	
+	
+	/**
+	 * 
+	 * Creates a new movement with a given distance unit and time unit (if given)
+	 * @param value the value of the movement vector. Example: (1,0,0), 
+	 * @param unitDistance the distance unit of this Movement
+	 * @param unitTime the time units of this Movement
+	 * @param degree the degree of this Movement. For example, a Movement of
+	 * degree 0 is a distance, degree 1 is a velocity, degree 2 is an 
+	 * acceleration, etc.
+	 * 
+	 * @see UNIT_DISTANCE_METER
+	 * @see UNIT_TIME_SECOND
+	 */
+	public Movement(Vector3f value, int unitDistance, int unitTime, int degree) {
+		this.x = value.x;
+		this.y = value.y;
+		this.z = value.z;
+		this.unitDistance = unitDistance;
+		this.unitTime = new int[degree];
+		for (int i = 0; i < degree; i++) {
+			this.unitTime[i]=unitTime;
+		}
 	}
 
 	/**
@@ -609,6 +689,28 @@ public class Movement extends Vector3f {
 		retTimeUnits[retTimeUnits.length-1] = timeUnits;
 		Movement ret = new Movement((m1.x-m2c.x)/time, (m1.y-m2c.y)/time, (m1.z-m2c.z)/time, m1.unitDistance, retTimeUnits);
 		return ret;
+	}
+	
+	/**
+	 * Returns a human-readable String of this Movement
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		
+
+		sb.append(" [A ");
+		sb.append(getType());
+		sb.append(" with units: ");
+		sb.append(DISTANCE_UNIT_NAMES_PLURAL[unitDistance]);
+		for (int i = 0; i < unitTime.length; i++) {
+			sb.append(" per ");
+			sb.append(TIME_UNIT_NAMES_SINGULAR[unitTime[i]]);
+		}
+		sb.append("]");
+		
+		return sb.toString();
 	}
 
 
