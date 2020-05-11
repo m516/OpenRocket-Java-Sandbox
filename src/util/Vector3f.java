@@ -172,5 +172,20 @@ public class Vector3f {
 		return ret;
 	}
 	
+	/**
+	 * Returns a human-readable String of this vector
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		sb.append(x);
+		sb.append(", ");
+		sb.append(y);
+		sb.append(", ");
+		sb.append(z);
+		sb.append("}");
+		return sb.toString();
+	}
 	
 }
