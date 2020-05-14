@@ -3,6 +3,9 @@
  */
 package sandbox.sensors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.openrocket.simulation.SimulationStatus;
 import net.sf.openrocket.simulation.exception.SimulationException;
 import net.sf.openrocket.simulation.listeners.SimulationListener;
@@ -103,6 +106,39 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 	private void update(SimulationStatus arg0) {
 		updateVelocityAndAcceleration(arg0);
 		updateGravity(arg0);
+		fireAllStateChangedListeners();
 		initialized=true;
+	}
+	
+	
+	/**--------------Listeners-----------------**/
+	List<StateChangedListener> listeners = new ArrayList<StateChangedListener>();
+	/**
+	 * A listener interface that contains a method <code>OpenRocketIMUStateChanged()</code> that 
+	 * will be called each time the state of the rocket has been changed.
+	 * @author Micah Mundy
+	 */
+	public interface StateChangedListener{
+		/**
+		 * Override this method with any code that must be run when the state of an IMU
+		 * has changed.
+		 * @param imu the IMU whose state has changed
+		 */
+		public void OpenRocketIMUStateChanged(OpenRocketIMU imu);
+	}
+	/**
+	 * Adds a listener to this OpenRocketIMU
+	 * @param listener
+	 */
+	public void addStateChangedListener(StateChangedListener listener) {
+		listeners.add(listener);
+	}
+	/**
+	 * Calls the method <code>OpenRocketIMUStateChanged()</code> in all registered listeners
+	 */
+	private void fireAllStateChangedListeners() {
+		for(StateChangedListener listener: listeners) {
+			if(listener!=null) listener.OpenRocketIMUStateChanged(this);
+		}
 	}
 }
