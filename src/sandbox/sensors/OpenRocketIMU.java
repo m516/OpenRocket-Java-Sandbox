@@ -6,9 +6,11 @@ package sandbox.sensors;
 import net.sf.openrocket.simulation.SimulationStatus;
 import net.sf.openrocket.simulation.exception.SimulationException;
 import net.sf.openrocket.simulation.listeners.SimulationListener;
+import net.sf.openrocket.util.Coordinate;
 import sensors.AccelerationSensor;
 import sensors.GravitySensor;
 import util.Movement;
+import util.Vector3f;
 
 /**
  * @author Micah Mundy
@@ -18,67 +20,89 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 	
 	Movement acceleration, gravity;
 	Movement velocity;
+	boolean initialized = false;
 
 	/**
 	 * 
 	 */
 	public OpenRocketIMU() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Movement getAcceleration() {
-		// TODO Auto-generated method stub
-		return null;
+		return acceleration;
 	}
 
 	@Override
 	public Movement getGravity() {
-		// TODO Auto-generated method stub
-		return null;
+		return gravity;
 	}
 
 	@Override
 	public SimulationListener clone() {
-		// TODO Auto-generated method stub
-		return null;
+		return new OpenRocketIMU();
 	}
 
 	@Override
 	public void endSimulation(SimulationStatus arg0, SimulationException arg1) {
-		// TODO Auto-generated method stub
+		update(arg0);
 
 	}
 
 	@Override
 	public boolean isSystemListener() {
-		// TODO Auto-generated method stub
+		// TODO verify that this is the correct behavior of the method
 		return false;
 	}
 
 	@Override
 	public void postStep(SimulationStatus arg0) throws SimulationException {
-		Movement newVelocity = new Movement(arg0.getRocketVelocity().x, 
-				arg0.getRocketVelocity().y, 
-				arg0.getRocketVelocity().z, 
-				Movement.UNIT_DISTANCE_METER, 
-				Movement.UNIT_TIME_SECOND);
-		if(velocity!=null) {
-			acceleration = Movement.averageChangeOf(newVelocity, velocity, 1.0, Movement.UNIT_TIME_SECOND); //TODO get delta time between two simulation steps
-		}
-		
+		update(arg0);
 	}
 
 	@Override
 	public boolean preStep(SimulationStatus arg0) throws SimulationException {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void startSimulation(SimulationStatus arg0) throws SimulationException {
-		// TODO Auto-generated method stub
-
+		//Update velocity, acceleration, and gravity.
+		update(arg0);
 	}
-
+	
+	/**
+	 * Update the IMU's velocity and acceleartion from a SimulationStatus.
+	 * @param arg0 the SimulationStatus to update with
+	 */
+	private void updateVelocityAndAcceleration(SimulationStatus arg0) {
+		Coordinate c = arg0.getRocketVelocity();
+		Movement newVelocity = new Movement(c.x, c.y, c.z, Movement.UNIT_DISTANCE_METER, Movement.UNIT_TIME_SECOND);
+		
+		if(velocity!=null) {
+			acceleration = Movement.averageChangeOf(newVelocity, velocity, 1.0, Movement.UNIT_TIME_SECOND);
+		}
+	}
+	
+	private void updateGravity(SimulationStatus arg0){
+		//Get the value of the gravity at the current position
+		float gravityAmount = (float) arg0.getSimulationConditions().getGravityModel().getGravity(arg0.getRocketWorldPosition());
+		//Create a Coordinate with the gravity
+		Coordinate c = new Coordinate(0,0,-gravityAmount);
+		//Rotate the Coordinate with the gravity
+		Coordinate r = arg0.getRocketOrientationQuaternion().rotate(c);
+		//Set the gravity to the value of that coordinate
+		Vector3f rv = new Vector3f(r);
+		gravity = new Movement(rv, Movement.UNIT_DISTANCE_METER, Movement.UNIT_TIME_SECOND, 2);
+	}
+	
+	/**
+	 * Updates the simulated gravity, velocity, acceleration, and initialized values.
+	 * @param arg0
+	 */
+	private void update(SimulationStatus arg0) {
+		updateVelocityAndAcceleration(arg0);
+		updateGravity(arg0);
+		initialized=true;
+	}
 }
