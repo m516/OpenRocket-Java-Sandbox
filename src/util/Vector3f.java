@@ -3,11 +3,13 @@
  */
 package util;
 
+import net.sf.openrocket.util.Coordinate;
+
 /**
+ * A three-dimentional floating point vector.
  * @author Micah
- *
  */
-public class Vector3f {
+public class Vector3f{
 
 	
 	public float x;
@@ -188,4 +190,44 @@ public class Vector3f {
 		return sb.toString();
 	}
 	
+	/*-----Conversion to/from OpenRocket's net.sf.openrocket.util.Coordinate class----*/
+	
+	/**
+	 * Converts an OpenRocket Coordinate into a home-style Vector3f
+	 * @param c the Coordinate to transorm
+	 * @return a Vector3f representation of the Coordinate
+	 */
+	public static Vector3f fromOpenRocketCoordinate(Coordinate c) {
+		Vector3f ret = new Vector3f();
+		
+		ret.x=(float) c.x;
+		ret.y=(float) c.y;
+		ret.z=(float) c.z;
+		
+		return ret;
+	}
+	
+	/**
+	 * A constructor that copies the values of an OpenRocket Coordinate <p>
+	 * Note that some data is lost in the conversion because Coordinate retains
+	 * its values as doubles, while Vector3f stores them as floats.
+	 * @param c the Coordinate to transform into a Vector3f
+	 * 
+	 */
+	public Vector3f(Coordinate c) {
+		x=(float) c.x;
+		y=(float) c.y;
+		z=(float) c.z;
+	}
+	
+	/**
+	 * Converts this Vector3f into an OpenRocket Coordinate <p>
+	 * Used to perform operations supported by Openrocket such as
+	 * quaternion rotations, etc.
+	 * @return Coordinate representation of this Vector3f
+	 */
+	public Coordinate toCoordinate() {
+		Coordinate c = new Coordinate(x, y, z);
+		return c;
+	}
 }
