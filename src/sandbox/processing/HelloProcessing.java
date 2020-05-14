@@ -6,6 +6,7 @@ package sandbox.processing;
 import processing.core.PApplet;
 
 /**
+ * A test to see Processing work in Eclipse
  * @author Micah Mundy
  *
  */
