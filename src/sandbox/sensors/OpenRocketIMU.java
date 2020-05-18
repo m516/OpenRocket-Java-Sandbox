@@ -52,9 +52,17 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 
 	}
 
+	/**
+	 * Return whether this is a system listener.  System listeners are used internally for various
+	 * purposes by OpenRocket.  User-written listeners should always return <code>false</code>.
+	 * <p>
+	 * System listeners do not cause warnings to be added to the simulation results when they affect
+	 * the simulation.
+	 * 
+	 * @return		whether this is a system listener
+	 */
 	@Override
 	public boolean isSystemListener() {
-		// TODO verify that this is the correct behavior of the method
 		return false;
 	}
 
