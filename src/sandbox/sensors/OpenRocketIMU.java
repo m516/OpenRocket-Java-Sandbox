@@ -26,12 +26,12 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 	boolean initialized = false;
 
 	/**
-	 * 
+	 * Creates a new IMU
 	 */
 	public OpenRocketIMU() {
 	}
 
-	@Override
+
 	public Movement getAcceleration() {
 		return acceleration;
 	}
@@ -41,11 +41,25 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 		return gravity;
 	}
 
+	/**
+	 * An implementation of a method overrode from SimulationListener. 
+	 * All parameters are updated from the simulation, and all of this instance's
+	 * listeners are also called. <p>
+	 * 
+	 * <b>WARNING: </b> this method does NOT add the cloned IMU as a listener 
+	 * to any Simulation instance! That must be done manually.
+	 */
 	@Override
 	public SimulationListener clone() {
-		return new OpenRocketIMU();
+		OpenRocketIMU i = new OpenRocketIMU();
+		return i;
 	}
 
+	/**
+	 * An implementation of a method overrode from SimulationListener. 
+	 * All parameters are updated from the simulation, and all of this instance's
+	 * listeners are also called.
+	 */
 	@Override
 	public void endSimulation(SimulationStatus arg0, SimulationException arg1) {
 		update(arg0);
@@ -66,16 +80,31 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 		return false;
 	}
 
+	/**
+	 * An implementation of a method overrode from SimulationListener. 
+	 * All parameters are updated from the simulation, and all of this instance's
+	 * listeners are also called.
+	 */
 	@Override
 	public void postStep(SimulationStatus arg0) throws SimulationException {
 		update(arg0);
 	}
 
+	/**
+	 * An implementation of a method overrode from SimulationListener. 
+	 * All parameters are updated from the simulation, and all of this instance's
+	 * listeners are also called.
+	 */
 	@Override
 	public boolean preStep(SimulationStatus arg0) throws SimulationException {
 		return true;
 	}
 
+	/**
+	 * An implementation of a method overrode from SimulationListener. 
+	 * All parameters are updated from the simulation, and all of this instance's
+	 * listeners are also called.
+	 */
 	@Override
 	public void startSimulation(SimulationStatus arg0) throws SimulationException {
 		//Update velocity, acceleration, and gravity.
@@ -95,6 +124,10 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 		}
 	}
 	
+	/**
+	 * Updates the Gravity field of this IMU from a simulation
+	 * @param arg0 the simulation with the gravity field
+	 */
 	private void updateGravity(SimulationStatus arg0){
 		//Get the value of the gravity at the current position
 		float gravityAmount = (float) arg0.getSimulationConditions().getGravityModel().getGravity(arg0.getRocketWorldPosition());
@@ -109,7 +142,7 @@ public class OpenRocketIMU implements SimulationListener, GravitySensor, Acceler
 	
 	/**
 	 * Updates the simulated gravity, velocity, acceleration, and initialized values.
-	 * @param arg0
+	 * @param arg0 the simulation instance to update from
 	 */
 	private void update(SimulationStatus arg0) {
 		updateVelocityAndAcceleration(arg0);
