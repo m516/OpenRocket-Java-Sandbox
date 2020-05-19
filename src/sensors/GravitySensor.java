@@ -3,7 +3,7 @@ package sensors;
 import util.Movement;
 
 /**
- * 
+ * A template for a gravity sensor
  * @author Micah
  *
  */
