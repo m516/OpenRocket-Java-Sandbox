@@ -267,15 +267,8 @@ public abstract class AirbrakesParser implements AirbrakesSocketConnection.Messa
 	 *    then the airbrakes code is requesting the IMU's acceleration value. </li>
 	 *  </ul> 
 	 *  
-	 * The IMU is oriented in the rocket in such a way that the ___-axis is
-	 * pointing up. <b>(TODO the current orientation of the BNO055 is unknown. This is 
-	 * critical to get reliable results from the airbrakes code)</b>
-	 * 
-	 * current air pressure, a value that
-	 * it would otherwise get from a real MPL115A2 barometer. In this
-	 * case, the value of <code>requestedDataOpCode</code> will be 
-	 * equal to the byte obtained by 
-	 * <code>PropertyManager.getProperty("MPL115A2_REGISTER_PRESSURE_MSB")</code>. <p>
+	 * The IMU is oriented in the rocket in such a way that the <b>z-axis</b> is
+	 * pointing up. 
 	 * 
 	 * Each vector must be sent as the x, y, and z values in that order.
 	 * Each of these values must be sent as a <b>little-endian signed short 
@@ -321,15 +314,8 @@ public abstract class AirbrakesParser implements AirbrakesSocketConnection.Messa
 	 *    then the airbrakes code is requesting the IMU's acceleration value. </li>
 	 *  </ul> 
 	 *  
-	 * The IMU is oriented in the rocket in such a way that the ___-axis is
-	 * pointing up. <b>(TODO the current orientation of the BNO055 is unknown. This is 
-	 * critical to get reliable results from the airbrakes code)</b>
-	 * 
-	 * current air pressure, a value that
-	 * it would otherwise get from a real MPL115A2 barometer. In this
-	 * case, the value of <code>requestedDataOpCode</code> will be 
-	 * equal to the byte obtained by 
-	 * <code>PropertyManager.getProperty("MPL115A2_REGISTER_PRESSURE_MSB")</code>. <p>
+	 * The IMU is oriented in the rocket in such a way that the <b>z-axis</b> is
+	 * pointing up. 
 	 * 
 	 * Each vector must be sent as the x, y, and z values in that order.
 	 * Each of these values must be sent as a <b>little-endian signed short 
