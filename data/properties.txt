@@ -1,0 +1,21 @@
+airbrakes_exe                        =data/airbrakes_code/airbrakes_sim.exe
+airbrakes_server_port                =8090
+
+
+
+
+
+airbrakes_request_data_MPL115A2      =96
+airbrakes_request_data_BNO055_addr_A =40
+airbrakes_request_data_BNO055_addr_B =41
+airbrakes_request_data_time          =2
+airbrakes_command_actuate            =5
+airbrakes_command_deactuate          =6
+airbrakes_command_done               =1
+airbrakes_command_finished           =3
+
+
+BNO055_CHIP_ID_ADDR                  =0
+BNO055_VECTOR_GRAVITY                =46
+BNO055_VECTOR_LINEARACCEL            =40
+MPL115A2_REGISTER_PRESSURE_MSB       =0
